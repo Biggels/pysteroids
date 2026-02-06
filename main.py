@@ -15,13 +15,13 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
-    updatable = pygame.sprite.Group()
-    drawable = pygame.sprite.Group()
+    updatables = pygame.sprite.Group()
+    drawables = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
 
-    Player.containers = (updatable, drawable)
-    Asteroid.containers = (asteroids, updatable, drawable)
-    AsteroidField.containers = updatable
+    Player.containers = (updatables, drawables)
+    Asteroid.containers = (asteroids, updatables, drawables)
+    AsteroidField.containers = updatables
 
     asteroid_field = AsteroidField()
 
@@ -36,7 +36,7 @@ def main():
                 return
 
         # update
-        updatable.update(dt)
+        updatables.update(dt)
 
         for asteroid in asteroids:
             if asteroid.collides_with(player):
@@ -47,7 +47,7 @@ def main():
         # draw
         screen.fill("black")
 
-        for thing in drawable:
+        for thing in drawables:
             thing.draw(screen)
 
         pygame.display.flip()
